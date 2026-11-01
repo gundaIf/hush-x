@@ -1,0 +1,83 @@
+/*
+ * Hush. Every rule is gated on a hush-<feature> class that content.js puts on <html>.
+ * Selectors cover both X's current markup (data-engagement-action, <use href="#icon-…">)
+ * and the older data-testid markup. [data-hush~="…"] catches what content.js tags by text.
+ */
+
+/* 1 · Engagement counts: keep the buttons, drop the numbers */
+html.hush-engagement [data-engagement-action]:not([data-engagement-action="generic"]) span[dir="ltr"],
+html.hush-engagement :is([data-testid="reply"], [data-testid="retweet"], [data-testid="unretweet"], [data-testid="like"], [data-testid="unlike"], [data-testid="bookmark"], [data-testid="removeBookmark"]) [data-testid="app-text-transition-container"],
+html.hush-engagement article a[href*="/status/"]:is([href$="/retweets"], [href$="/quotes"], [href$="/likes"], [href$="/bookmarks"]),
+html.hush-engagement [data-hush~="engagement"] {
+  display: none !important;
+}
+
+/* 2 · Views and post analytics */
+html.hush-views [data-engagement-action="generic"]:has(use[href="#icon-bar-chart"]),
+html.hush-views button[aria-label="View count"],
+html.hush-views article a[href$="/analytics"],
+html.hush-views [data-testid="analyticsButton"],
+html.hush-views [data-hush~="views"] {
+  display: none !important;
+}
+
+/* 3 · Notification badge */
+html.hush-bell [data-testid="AppTabBar_Notifications_Link"] [aria-live="polite"],
+html.hush-bell a[href="/notifications"]:not([role="tab"]) [aria-live="polite"],
+html.hush-bell [data-hush~="bell"] {
+  display: none !important;
+}
+
+/* 4 · Tab title count is handled in content.js */
+
+/* 5 · For You tab */
+html.hush-forYou [data-hush~="forYou"] {
+  display: none !important;
+}
+
+/* 6 · "Show 35 posts" pill */
+html.hush-newPosts [role="button"]:has([data-testid="pillLabel"]),
+html.hush-newPosts [data-testid="pillLabel"],
+html.hush-newPosts [data-hush~="newPosts"] {
+  display: none !important;
+}
+
+/* 7 · Notifications: hide the All / Verified tabs (content.js moves you to Mentions) */
+html.hush-mentions [data-hush~="mentions"] {
+  display: none !important;
+}
+
+/* 8 · Right sidebar: remove the whole column, then shrink the main wrapper (990px, sized for
+ * feed + sidebar) to the feed's width. The nav and main halves both flex-grow equally, so the
+ * nav + feed pair ends up centered. Search is still in the left nav. */
+html.hush-sidebar [data-testid="sidebarColumn"],
+html.hush-sidebar [data-hush~="sidebar"] {
+  display: none !important;
+}
+html.hush-sidebar main[role="main"] > div:has([data-testid="sidebarColumn"]) {
+  width: 600px !important;
+  max-width: 100% !important;
+}
+
+/* 9 · Follower, following and post totals */
+html.hush-followers a[href$="/followers_you_follow"],
+html.hush-followers [data-hush~="followers"] {
+  display: none !important;
+}
+
+/* Look · grayscale. "media" covers post images, video, link cards, avatars and banners. */
+html.hush-gray-all {
+  filter: grayscale(1);
+}
+html.hush-gray-media article :is(img, video, [style*="background-image"]),
+html.hush-gray-media :is([data-testid^="UserAvatar"], a[href$="/header_photo"], a[href$="/photo"]) {
+  filter: grayscale(1);
+}
+
+/* 10 · Who to follow, Discover more, promoted posts */
+html.hush-injections:is([data-hush-page="home"], [data-hush-page="status"]) [data-testid="cellInnerDiv"]:has([data-testid="UserCell"]),
+html.hush-injections [data-testid="cellInnerDiv"]:has(a[href^="/i/connect_people"]),
+html.hush-injections [data-testid="cellInnerDiv"]:has([data-testid="placementTracking"]),
+html.hush-injections [data-hush~="injections"] {
+  display: none !important;
+}

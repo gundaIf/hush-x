@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hush</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app" id="app" data-mode="custom">
+      <header class="top">
+        <div class="brand">
+          <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+            <defs>
+              <linearGradient id="markBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#262A36" />
+                <stop offset="1" stop-color="#0B0C10" />
+              </linearGradient>
+              <mask id="moonCut">
+                <rect width="40" height="40" fill="#fff" />
+                <circle cx="24.5" cy="15.5" r="9" fill="#000" />
+              </mask>
+            </defs>
+            <rect width="40" height="40" rx="11" fill="url(#markBg)" />
+            <circle class="mark-moon" cx="19" cy="20" r="10" fill="#F2C46D" mask="url(#moonCut)" />
+          </svg>
+          <div class="brand-text">
+            <h1>Hush</h1>
+            <p>Much more calm X</p>
+          </div>
+        </div>
+        <div class="seg mode-seg" role="radiogroup" aria-label="Mode">
+          <span class="seg-thumb" aria-hidden="true"></span>
+          <button type="button" role="radio" data-mode="off">Off</button>
+          <button type="button" role="radio" data-mode="custom">Custom</button>
+          <button type="button" role="radio" data-mode="hardcore">Hardcore</button>
+        </div>
+      </header>
+
+      <nav class="tabs" role="tablist" aria-label="Sections">
+        <button type="button" role="tab" id="tab-mute" data-tab="mute" aria-controls="panel-mute">Mute</button>
+        <button type="button" role="tab" id="tab-look" data-tab="look" aria-controls="panel-look">Look</button>
+      </nav>
+
+      <div class="panel" id="panel-mute" role="tabpanel" aria-labelledby="tab-mute">
+      <section class="modes">
+        <div class="status">
+          <p class="note" id="note"></p>
+          <div class="meter" aria-live="polite">
+            <div class="ticks" id="ticks" aria-hidden="true"></div>
+            <span class="meter-label"><b id="count">0</b> of 10 muted</span>
+          </div>
+        </div>
+
+        <div class="hold" id="hold" hidden>
+          <button type="button" class="hold-btn" id="holdBtn">
+            <span class="hold-fill" aria-hidden="true"></span>
+            <span class="hold-label">Hold to leave Hardcore</span>
+          </button>
+          <button type="button" class="hold-stay" id="holdStay">Stay</button>
+        </div>
+      </section>
+
+      <section class="list" id="list"></section>
+      </div>
+
+      <div class="panel" id="panel-look" role="tabpanel" aria-labelledby="tab-look" hidden>
+        <section class="look-block">
+          <p class="group-label">Theme</p>
+          <div class="themes" id="themes" role="radiogroup" aria-label="X theme">
+            <button type="button" class="theme" role="radio" data-theme="light">
+              <span class="preview pv-light" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="theme-name">Light</span>
+            </button>
+            <button type="button" class="theme" role="radio" data-theme="dim">
+              <span class="preview pv-dim" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="theme-name">Dim</span>
+            </button>
+            <button type="button" class="theme" role="radio" data-theme="dark">
+              <span class="preview pv-dark" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="theme-name">Lights out</span>
+            </button>
+          </div>
+          <p class="hint" id="themeHint"></p>
+        </section>
+
+        <div class="look-pair">
+          <section class="look-block">
+            <p class="group-label">Grayscale</p>
+            <div class="seg gray-seg" id="graySeg" role="radiogroup" aria-label="Grayscale" data-value="off">
+              <span class="seg-thumb" aria-hidden="true"></span>
+              <button type="button" role="radio" data-gray="off">Off</button>
+              <button type="button" role="radio" data-gray="media">Images</button>
+              <button type="button" role="radio" data-gray="all">Everything</button>
+            </div>
+            <p class="hint" id="grayHint"></p>
+          </section>
+
+          <section class="look-block">
+            <p class="group-label">Video</p>
+            <div class="card">
+              <button type="button" class="row" role="switch" id="autoplayRow" aria-checked="false">
+                <span class="ico" id="autoplayIco"></span>
+                <span class="row-text">
+                  <span class="row-title">Stop autoplay</span>
+                  <span class="row-desc">Plays only when you click</span>
+                </span>
+                <span class="sw" aria-hidden="true"></span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="foot">
+        <span class="pulse" aria-hidden="true"></span>
+        <span id="foot">Changes apply instantly on x.com</span>
+      </footer>
+    </main>
+
+    <script src="../src/settings.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

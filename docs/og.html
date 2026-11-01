@@ -1,0 +1,267 @@
+<!doctype html>
+<!-- Source for docs/og.png (1280×640 social preview). Render: see scripts/render_docs.sh -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hush social preview</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        width: 1280px;
+        height: 640px;
+        overflow: hidden;
+        background: #0b0c10;
+      }
+      body {
+        position: relative;
+        color: #ecedf0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .glow {
+        position: absolute;
+        left: -180px;
+        top: -260px;
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(closest-side, rgba(242, 196, 109, 0.16), transparent);
+      }
+      .grain {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 22px 22px;
+        mask-image: linear-gradient(90deg, transparent, #000 40%, #000);
+      }
+
+      .left {
+        position: absolute;
+        left: 88px;
+        top: 112px;
+        width: 560px;
+      }
+      .mark {
+        width: 92px;
+        height: 92px;
+        border-radius: 26px;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 60px -20px rgba(0, 0, 0, 0.9);
+      }
+      h1 {
+        margin-top: 34px;
+        font-size: 132px;
+        font-weight: 720;
+        letter-spacing: -0.05em;
+        line-height: 0.9;
+      }
+      .sub {
+        margin-top: 18px;
+        font-size: 42px;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        color: #f2c46d;
+      }
+      .desc {
+        margin-top: 26px;
+        font-size: 22px;
+        line-height: 1.45;
+        color: #8d909b;
+        letter-spacing: -0.005em;
+      }
+
+      /* the before / after cards */
+      .stage {
+        position: absolute;
+        right: 80px;
+        top: 96px;
+        width: 470px;
+        height: 450px;
+      }
+      .card {
+        position: absolute;
+        width: 430px;
+        padding: 22px 24px 20px;
+        border-radius: 22px;
+        background: #15171d;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 30px 80px -30px rgba(0, 0, 0, 0.9);
+      }
+      .noisy {
+        right: 0;
+        top: 0;
+        transform: rotate(4deg);
+        opacity: 0.42;
+        filter: blur(0.4px);
+      }
+      .quiet {
+        left: 0;
+        top: 190px;
+        transform: rotate(-2deg);
+        box-shadow: inset 0 0 0 1px rgba(242, 196, 109, 0.35), 0 40px 90px -30px rgba(0, 0, 0, 0.95);
+      }
+      .head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .av {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3a3f4d, #262a35);
+      }
+      .lines i {
+        display: block;
+        height: 9px;
+        border-radius: 9px;
+        background: #2c303b;
+      }
+      .lines i + i {
+        margin-top: 8px;
+        background: #22252e;
+      }
+      .body {
+        margin-top: 18px;
+      }
+      .body i {
+        display: block;
+        height: 11px;
+        border-radius: 11px;
+        background: #2a2e38;
+      }
+      .body i + i {
+        margin-top: 10px;
+      }
+      .bar {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 22px;
+        color: #6f7380;
+        font-size: 17px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      .bar span {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .bar svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .noisy .bar {
+        color: #a3a6b0;
+      }
+      .noisy .hot {
+        color: #f4517a;
+      }
+      .badge {
+        position: absolute;
+        right: -10px;
+        top: -12px;
+        min-width: 38px;
+        height: 38px;
+        padding: 0 10px;
+        border-radius: 19px;
+        background: #f4517a;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 0 4px #0b0c10;
+      }
+      .quiet .bar {
+        color: #8d909b;
+      }
+      .pill {
+        position: absolute;
+        right: 22px;
+        top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 13px;
+        border-radius: 99px;
+        background: rgba(242, 196, 109, 0.12);
+        color: #f2c46d;
+        font-size: 15px;
+        font-weight: 650;
+      }
+      .ticks {
+        display: flex;
+        gap: 3px;
+      }
+      .ticks b {
+        width: 3px;
+        height: 12px;
+        border-radius: 2px;
+        background: #f2c46d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="grain"></div>
+
+    <div class="left">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#262A36" />
+            <stop offset="1" stop-color="#0B0C10" />
+          </linearGradient>
+          <mask id="cut">
+            <rect width="40" height="40" fill="#fff" />
+            <circle cx="24.5" cy="15.5" r="9" fill="#000" />
+          </mask>
+        </defs>
+        <rect width="40" height="40" rx="11" fill="url(#bg)" />
+        <circle cx="19" cy="20" r="10" fill="#F2C46D" mask="url(#cut)" />
+      </svg>
+      <h1>Hush</h1>
+      <p class="sub">Much more calm X</p>
+      <p class="desc">A free Chrome extension that mutes likes, views, follower counts, badges and the For You feed.</p>
+    </div>
+
+    <div class="stage">
+      <div class="card noisy">
+        <span class="badge">27</span>
+        <div class="head">
+          <div class="av"></div>
+          <div class="lines"><i style="width: 150px"></i><i style="width: 96px"></i></div>
+        </div>
+        <div class="body"><i style="width: 100%"></i><i style="width: 72%"></i></div>
+        <div class="bar">
+          <span><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" /></svg>2.1K</span>
+          <span><svg viewBox="0 0 24 24"><path d="M7 4 4 7l3 3M4 7h11a4 4 0 0 1 4 4M17 20l3-3-3-3M20 17H9a4 4 0 0 1-4-4" /></svg>8.4K</span>
+          <span class="hot"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10z" /></svg>48.2K</span>
+          <span><svg viewBox="0 0 24 24"><path d="M5 20v-8M12 20V4M19 20v-5" /></svg>1.2M</span>
+        </div>
+      </div>
+
+      <div class="card quiet">
+        <span class="pill"><span class="ticks"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span>Hushed</span>
+        <div class="head">
+          <div class="av"></div>
+          <div class="lines"><i style="width: 150px"></i><i style="width: 96px"></i></div>
+        </div>
+        <div class="body"><i style="width: 100%"></i><i style="width: 72%"></i></div>
+        <div class="bar">
+          <span><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" /></svg></span>
+          <span><svg viewBox="0 0 24 24"><path d="M7 4 4 7l3 3M4 7h11a4 4 0 0 1 4 4M17 20l3-3-3-3M20 17H9a4 4 0 0 1-4-4" /></svg></span>
+          <span><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10z" /></svg></span>
+          <span><svg viewBox="0 0 24 24"><path d="M6 4h12v16l-6-4-6 4z" /></svg></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
