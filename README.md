@@ -74,12 +74,14 @@ A second tab for how X looks:
 
 ## Install
 
-Hush isn't on the Chrome Web Store yet. To install it from this repo:
+Hush isn't on the Chrome Web Store yet. To install it:
 
-1. [Download the ZIP](../../archive/refs/heads/main.zip) and unzip it, or `git clone` this repo.
+1. Download `hush-x-v….zip` from the [latest release](../../releases/latest) and unzip it.
 2. Open `chrome://extensions` and turn on **Developer mode** (top right).
 3. Click **Load unpacked** and pick the unzipped folder.
 4. Pin Hush to your toolbar and reload any open X tabs.
+
+To update, download the new release, replace the folder, and click the reload arrow on the Hush card in `chrome://extensions`. Your settings carry over.
 
 It works in Chrome, Brave, Arc, Edge and other Chromium browsers.
 
@@ -97,6 +99,7 @@ X changes its markup often. If a number creeps back, please [open an issue](../.
 
 ## Development
 
+- `scripts/package.sh` builds `dist/hush-x-v<version>.zip` (the release download) from the version in `manifest.json`.
 - `python3 scripts/make_icons.py` regenerates the toolbar icons (needs Pillow).
 - `scripts/render_docs.sh` re-renders `docs/og.png` and the popup screenshots with a headless Chromium. It defaults to Brave; pass another browser binary as the first argument.
 
